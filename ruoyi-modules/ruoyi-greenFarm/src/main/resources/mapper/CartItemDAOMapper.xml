@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruoyi.greenfarm.persistence.CartItemDAO">
+    <insert id="insertCartItem">
+        insert into cartitem(
+            itemid,
+            cartid,
+            customerid,
+            number
+        )
+        values(
+            #{itemid},
+            #{cartid},
+            #{customeid},
+            #{number}
+        )
+    </insert>
+    <delete id="deleteCartItem" parameterType="CartItem">
+        delete from cartitem where itemid = #{itemid} and cartid = #{cartid}
+    </delete>
+    <update id="updateCartItem" parameterType="CartItem">
+        update cartitem set
+            quality = #{quality}
+        where itemid = #{itemid} and cartid = #{cartid}
+    </update>
+    <select id="getCartItem" parameterType = "CartItem" resultType="CartItem">
+        select * from cartitem where itemid = #{itemid} and cartid = #{cartid}
+    </select>
+</mapper>

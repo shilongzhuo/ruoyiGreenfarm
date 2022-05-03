@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruoyi.greenfarm.persistence.OrderDAO">
+    <insert id="insertOrder">
+        insert into orders(
+            orderid,
+            customerid,
+            orderdate,
+            address,
+            phone,
+            totalprice
+        )
+        values(
+            #{orderid},
+            #{customerid},
+            #{orderdate},
+            #{address},
+            #{phone},
+            #{totalprice},
+        )
+    </insert>
+    <insert id="insertOrderitem">
+          insert into orderitem(
+            orderid,
+            customerid,
+            itemid,
+            quality
+        )
+        values(
+            #{orderid},
+            #{customerid},
+            #{itemid},
+            #{quality}
+        )
+    </insert>
+    <insert id="insertOrderstatus">
+          insert into orderstatus
+            orderid,
+            stamptime,
+            status
+        )
+        values(
+            #{orderid},
+            #{stamptime},
+            #{status}
+        )
+    </insert>
+    <delete id="deleteOrder">
+        delete from orders where orderid = #{orderid}
+    </delete>
+    <select id="findOrder" parameterType="Orders" resultType="Orders">
+        select * from orders where orderid = #{orderid}
+    </select>
+    <select id="findAllOrder" parameterType="Orders" resultType="Orders">
+        select
+            orders.orderid,
+            orders.customerid,
+            orderdate,
+            address,
+            phone,
+            totalprice,
+            stamptime,
+            status,
+            itemid,
+            quality
+        from orders,orderitem,orderstatus
+        where orders.orderid = orderitem.orderid and orders.orderid = orderstatus.orderid
+    </select>
+
+
+
+</mapper>

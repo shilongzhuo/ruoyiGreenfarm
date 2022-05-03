@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruoyi.greenfarm.persistence.CartDAO">
+    <select id="findByCartid" parameterType="Cart" resultType="Cart">
+        select * from cart where cartid = #{cartid}
+    </select>
+    <select id="getAllCartitem" parameterType="Cart" resultType="Cart">
+        select
+        cartitem.cartid,
+        cartitem.itemid,
+        cartitem.customerid,
+        cartitem.number,
+        item.name,
+        item.category,
+        item.price,
+        item.src,
+        item.details,
+        item.price as totalprice
+        from cartitem,item
+        where cartitem.itemid = item.itemid
+
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruoyi.greenfarm.persistence.FarmDAO">
+    <insert id="insertFarm">
+        insert into farm(
+            farmid,
+            name,
+            address,
+            f_id,
+            status,
+            userid,
+            src,
+            price
+        )
+        values(
+            #{farmid},
+            #{name},
+            #{address},
+            #{f_id},
+            #{status},
+            #{userid},
+            #{src},
+            #{price}
+        )
+    </insert>
+    <delete id="deleteFarm">
+        delete from farm where farmid = #{farmid}
+    </delete>
+    <update id="updateFarm">
+          update farm set
+          price = #{price}
+          where farmid = #{farmid}
+    </update>
+    <select id="getFarmByFarmid" parameterType="Farm" resultType="Farm">
+        select * from farm where farmid = #{farmid}
+    </select>
+    <select id="getAllFarm" resultType="Farm">
+        select * from Farm order by price
+    </select>
+</mapper>
